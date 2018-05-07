@@ -1,0 +1,50 @@
+# Connection
+set ssl_starttls=yes
+set ssl_force_tls=yes
+set ssl_use_sslv3=yes
+set timeout=60  #Check for mail every minute
+set mail_check=5
+
+# Outgoing
+set realname="Sean Davis"
+set from="`lpass show --username email`"
+set smtp_pass="`lpass show --password email`"
+#
+set smtp_authenticators="login"
+set smtp_url="smtp://sean@farewell-solenya.com@smtp.office365.com:587"
+
+# Incoming
+# set pop_user="<user>"
+# set pop_pass="<pass>"
+set imap_user="sean@farewell-solenya.com"
+set imap_pass="`lpass show --password email`"
+#
+set folder="imaps://outlook.office365.com:993"
+set mbox="+INBOX"
+set postponed="+Drafts"
+set spoolfile="+INBOX"
+set record="+Sent Items"
+set trash="+Deleted Items"
+set imap_check_subscribed
+unset imap_passive
+
+# Caches
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+# Useful customizations
+set smart_wrap = yes
+set sort = 'threads'
+set sort_aux = 'last-date-received'
+set imap_check_subscribed
+#
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+mailboxes
+
+# Editor Information
+set editor=vim
