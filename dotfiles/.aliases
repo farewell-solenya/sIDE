@@ -1,0 +1,3 @@
+alias side="docker run -v $pwd:/root link/side"
+alias side-build="docker build -t link/side ~/sIDE"
+alias sd-os-update="curl 10.0.2.2:3000/playbook.yml -o playbook.yml && ansible-playbook --connection=local -K playbook.yml"
