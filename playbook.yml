@@ -4,12 +4,30 @@
   connection: local
   become: yes
   tasks:
+  - name: ensure we are using testing sources
+    shell: sed -i 's/stretch/testing/g' /etc/apt/sources.list
   - name: update system
-    shell: apt-get update && apt-get upgrade -y
+    apt:
+      upgrade: dist
+      update_cache: yes
   - name: install window manager
+    apt:
+      name: {{item}}
+      state: installed
+    with_items:
+      - i3
+      - suckless-tools
+      - compton
+      - xinit
+      - zsh
+      - tmux
+      - git
+      - ranger
+      - neovim
+      - qutebrowser  
     shell: apt-get install -y i3 suckless-tools compton xinit
-  - name: install basic tools
-    shell: apt-get install -y zsh tmux git ranger neovim qutebrowser terminator && sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  - name: install oh my zsh
+    shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   - name: install docker
     become: no
     shell: curl -sSL https://get.docker.com | sh
@@ -18,7 +36,5 @@
     git:
       repo: https://github.com/Farewell-Solenya/side
       dest: ~/sIDE
-  - name: build sIDE
-    shell: echo build side
   - name: set up dotfiles
-    shell: echo get dotfiles
+    shell: ~/sIDE/dotfiles/link.sh

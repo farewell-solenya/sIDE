@@ -1,0 +1,13 @@
+{
+  "name": "preseed-svc-1",
+  "version": "1.0.0",
+  "description": "Provide preseed config files over HTTP",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sean Davis",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
